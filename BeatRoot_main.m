@@ -23,7 +23,7 @@ create3agents =1 %default value:1, other posiibilities : 0
 winning_agent = sort(cat(2,agentcell{3,1}, agentcell{5,1}), 'ascend'); %sort agents by their score
 winning_agent(end+1) = winning_agent(end)+agentcell{1,1} ; %add one more prediction to get the last click, just in case there are notes played after the last click
     
-winning_agent2 = sort(cat(2,agentcell{3,2}, agentcell{5,2}), 'ascend');
+winning_agent2 = sort(cat(2,agentcell{3,2}, agentcell{5,2}), 'ascend'); % winning_agent2 is the second best agent...
 winning_agent2(end+1) = winning_agent2(end)+agentcell{1,2} ; %add one more prediction to get the last click, just in case there are notes played after the last click
    
 
@@ -32,19 +32,7 @@ winning_agent2(end+1) = winning_agent2(end)+agentcell{1,2} ; %add one more predi
 clicks = (winning_agent)' ;
 
 
-%%
-%run Fscore 
 
-Fscore_mat = zeros(3,2)
-
-for i =1:3
-     Fscore_mat(i,:) =Fscore(trueclick_mat{i} , clicks, 0.07)
-end
-
-[Score, Index] = max(Fscore_mat, [], 1);
-
-Score
-Index
 %%
 
 hold on
@@ -59,6 +47,7 @@ plot(RMAT(RMAT(:,1)>40,3), 0.95*ones(length(RMAT(RMAT(:,1)>40,3))),'k.'  ); %oth
 for i=1:length(winning_agent') %the winning agent is plotted in red
    plot([winning_agent(i) winning_agent(i)],[0.9 1],'r');
 end
+
 hold off
 
 %%
@@ -140,6 +129,8 @@ instrumentlist = instrumentlist(I); % now instrumentlist is sorted by number of 
 
 
 %% 
+%now we only need the number of counts in one bar and the subdivision_in_notation , then we have all info needed to make a transcription
+
 [countnr, subdivision_in_notation] = find_time_signature(B, instrumentlist, subdiv_in_beat)
 
 
