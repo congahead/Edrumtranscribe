@@ -1,6 +1,6 @@
-function [RMAT, midifile] = CreateRmat(midifile) % Takes the name of the midi file and creates RMAT
+function [RMAT] = CreateRmat(midifile) % Takes the name of the midi file and creates RMAT, i.e. extracts 4th to sixth column
 
-midifile=readmidi(['/Users/joschischneider/Documents/MATLAB/Beatroot/midifiles_for_master/' midifile '.mid']);
+midifile=readmidi(['midifile '.mid']);
 
 RMAT=midifile(:,4:6);
 
